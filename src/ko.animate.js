@@ -1,2 +1,2 @@
 ko.bindingHandlers.fadeVisible = require('./bindings/fadeVisible');
-ko.bindingHandlers['animation.fade'] = require('./bindings/animation.fade');
+ko.bindingHandlers['animation.spin'] = require('./bindings/animation.spin');

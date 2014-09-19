@@ -7,25 +7,25 @@
     <body>
         <div>
             <div>Show / Hide binding</div>
-            <span data-bind="fadeVisible: {value: isVisible0, duration: 0.25}">Lorem ipsum</span>
+            <span data-bind="fadeVisible: {value: isVisibleFade, duration: 0.25}">Lorem ipsum</span>
             <div>
-                <input type="checkbox" data-bind="checked: isVisible0"/>
+                <input type="checkbox" data-bind="checked: isVisibleFade"/>
                 <span>Show</span>
             </div>
         </div>
 
         <div>
             <div>Show / Hide binding</div>
-            <span data-bind="animation.fade: isVisible1">Lorem ipsum</span>
+            <span data-bind="animation.spin: isVisibleSpin">Lorem ipsum</span>
             <div>
-                <input type="checkbox" data-bind="checked: isVisible1"/>
+                <input type="checkbox" data-bind="checked: isVisibleSpin"/>
                 <span>Show</span>
             </div>
         </div>
         <script>
             function Viewmodel(){
-                this.isVisible0 = ko.observable(true);
-                this.isVisible1 = ko.observable(true);
+                this.isVisibleFade = ko.observable(true);
+                this.isVisibleSpin = ko.observable(true);
             }
 
             ko.applyBindings(new Viewmodel());
