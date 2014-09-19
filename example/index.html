@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <script type="text/javascript" src="http://cdn.jsdelivr.net/knockout/3.2.0/knockout.js"></script>
+        <script type="text/javascript" src="../build/ko.animate.js"></script>
+        <link href="../build/ko.animate.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div>
+            <div>Show / Hide binding</div>
+            <span data-bind="fadeVisible: {value: isVisible0, duration: 0.25}">Lorem ipsum</span>
+            <div>
+                <input type="checkbox" data-bind="checked: isVisible0"/>
+                <span>Show</span>
+            </div>
+        </div>
+
+        <div>
+            <div>Show / Hide binding</div>
+            <span data-bind="animation.fade: isVisible1">Lorem ipsum</span>
+            <div>
+                <input type="checkbox" data-bind="checked: isVisible1"/>
+                <span>Show</span>
+            </div>
+        </div>
+        <script>
+            function Viewmodel(){
+                this.isVisible0 = ko.observable(true);
+                this.isVisible1 = ko.observable(true);
+            }
+
+            ko.applyBindings(new Viewmodel());
+        </script>
+    </body>
+</html>
