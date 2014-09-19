@@ -1,27 +1,23 @@
 @import (less) 'animation-mixin.less';
+@import (less) 'transform-mixin.less';
 
-@-webkit-keyframes spinIn {
-  0% {
-    -webkit-transform: scale3d(0, 1, 1);
-            transform: scale3d(0, 1, 1);
-  }
+@-webkit-keyframes spinIn{
+    0% {
+        .ko-transform(scale3d(0, 1, 1));
+    }
 
-  100% {
-    -webkit-transform: scale3d(1, 1, 1);
-            transform: scale3d(1, 1, 1);
-  }
+    100% {
+        .ko-transform(scale3d(1, 1, 1));
+    }
 }
 
-@-webkit-keyframes spinOut {
-  0% {
-    -webkit-transform: scale3d(1, 1, 1);
-            transform: scale3d(1, 1, 1);
-  }
-
-  100% {
-    -webkit-transform: scale3d(0, 1, 1);
-            transform: scale3d(0, 1, 1);
-  }
+@-webkit-keyframes spinOut{
+    0% {
+        .ko-transform(scale3d(1, 1, 1));
+    }
+    100% {
+        .ko-transform(scale3d(0, 1, 1));
+    }
 }
 
 .spinIn{
@@ -33,8 +29,6 @@
 }
 
 .animated {
-  -webkit-animation-duration: 1s;
-          animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
+    .ko-anim-duration(1s);
+    .ko-anim-fill-mode(both);
 }
