@@ -1,11 +1,21 @@
-function addClass(element, className){
-    if (element.className.indexOf(className) === -1){
-        element.className = element.className + ' ' + className;
-    }
-}
+function classManipulator(process){
+    return function(element, className){
+        var classes;
 
-function removeClass(element, className){
-    element.className = element.className.replace(className, '').trim();
+        if (typeof className !== 'string' || typeof element !== 'object'){
+            throw new Error('Invalid argument');
+        }
+
+        if (className.indexOf(' ') !== -1){
+            classes = className.split(' ');
+
+            classes.forEach(function(className){
+                process(element, className);
+            });
+        } else {
+            process(element, className);
+        }
+    }
 }
 
 function animateTo(data, cb){
@@ -38,7 +48,13 @@ function animateTo(data, cb){
 }
 
 module.exports = {
-    addClass: addClass,
-    removeClass: removeClass,
+    addClass: classManipulator(function(element, name){
+        if (element.className.indexOf(name) === -1){
+            element.className = element.className + ' ' + name;
+        }
+    }),
+    removeClass: classManipulator(function(element, name){
+        element.className = element.className.replace(name, '').trim();
+    }),
     animateTo: animateTo
-}
+};

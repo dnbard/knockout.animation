@@ -1,3 +1,5 @@
+@import (less) 'animation-mixin.less';
+
 @-webkit-keyframes spin {
   0% {
     -webkit-transform: scale3d(0, 1, 1);
@@ -11,8 +13,7 @@
 }
 
 .spin {
-  -webkit-animation-name: spin;
-          animation-name: spin;
+    .ko-anim(spin);
 }
 
 .animated {

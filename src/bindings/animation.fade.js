@@ -17,15 +17,14 @@ module.exports = {
 
         if (value){
             element.style.display = '';
+
+            utils.addClass(element, 'animated spinIn');
+
+            element.addEventListener('webkitAnimationEnd', function(){
+                utils.removeClass(element, 'animated spin');
+            });
         } else {
-            utils.addClass(element, 'animated');
-            utils.addClass(element, 'spin');
-
-            /*element.addEventListener('webkitAnimationEnd', function(){
-                debugger;
-            });*/
-
-            //element.style.display = 'none';
+            element.style.display = 'none';
         }
     }
 }
