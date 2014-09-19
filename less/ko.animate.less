@@ -1,19 +1,35 @@
 @import (less) 'animation-mixin.less';
 
-@-webkit-keyframes spin {
+@-webkit-keyframes spinIn {
   0% {
     -webkit-transform: scale3d(0, 1, 1);
             transform: scale3d(0, 1, 1);
   }
 
   100% {
-    -webkit-transform: scale3d(1, 1, 0);
-            transform: scale3d(1, 1, 0);
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
   }
 }
 
-.spin {
-    .ko-anim(spin);
+@-webkit-keyframes spinOut {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+
+  100% {
+    -webkit-transform: scale3d(0, 1, 1);
+            transform: scale3d(0, 1, 1);
+  }
+}
+
+.spinIn{
+    .ko-anim(spinIn);
+}
+
+.spinOut{
+    .ko-anim(spinOut);
 }
 
 .animated {

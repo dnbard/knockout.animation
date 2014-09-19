@@ -1,4 +1,5 @@
-var utils = require('../utils');
+var utils = require('../utils'),
+    config = require('../config');
 
 module.exports = {
     init: function(element, valueAccessor){
@@ -12,6 +13,17 @@ module.exports = {
         }
     },
     update: function(element, valueAccessor){
+        function spinInEndHandler(){
+            utils.removeClass(element, 'animated spinIn');
+            utils.removeEventListener(element, config.animationEvents, spinInEndHandler);
+        }
+
+        function spinOutEndHandler(){
+            utils.removeClass(element, 'animated spinOut');
+            utils.removeEventListener(element, config.animationEvents, spinOutEndHandler);
+            element.style.display = 'none';
+        }
+
         var payload = ko.toJS(valueAccessor()),
             value = typeof payload === 'object'? payload.value : payload;
 
@@ -20,11 +32,10 @@ module.exports = {
 
             utils.addClass(element, 'animated spinIn');
 
-            element.addEventListener('webkitAnimationEnd', function(){
-                utils.removeClass(element, 'animated spin');
-            });
+            utils.addEventListener(element, config.animationEvents, spinInEndHandler);
         } else {
-            element.style.display = 'none';
+            utils.addClass(element, 'animated spinOut');
+            utils.addEventListener(element, config.animationEvents, spinOutEndHandler);
         }
     }
 }

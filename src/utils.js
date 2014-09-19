@@ -47,6 +47,28 @@ function animateTo(data, cb){
     }
 }
 
+function addEventListener(element, events, handler){
+    if (typeof handler !== 'function' || typeof element !== 'object' || typeof events !== 'string' || events.length === 0){
+        throw new Error('Invalid argument');
+    }
+
+    var eventList = events.split(' ');
+    eventList.forEach(function(event){
+        element.addEventListener(event, handler);
+    });
+}
+
+function removeEventListener(element, events, handler){
+    if (typeof handler !== 'function' || typeof element !== 'object' || typeof events !== 'string' || events.length === 0){
+        throw new Error('Invalid argument');
+    }
+
+    var eventList = events.split(' ');
+    eventList.forEach(function(event){
+        element.removeEventListener(event, handler);
+    });
+}
+
 module.exports = {
     addClass: classManipulator(function(element, name){
         if (element.className.indexOf(name) === -1){
@@ -56,5 +78,7 @@ module.exports = {
     removeClass: classManipulator(function(element, name){
         element.className = element.className.replace(name, '').trim();
     }),
-    animateTo: animateTo
+    animateTo: animateTo,
+    addEventListener: addEventListener,
+    removeEventListener: removeEventListener
 };
