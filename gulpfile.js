@@ -18,11 +18,8 @@ gulp.task('build-js', function() {
 });
 
 gulp.task('build-less', function(){
-    gulp.src('less/**/*.less')
-        .pipe(less({
-            paths: [ path.join(__dirname, 'less', 'includes') ]
-        }))
-        .pipe(rename('ko.animate.css'))
+    gulp.src('less/ko.animate.less')
+        .pipe(less())
         .pipe(gulp.dest('build/'))
         .pipe(rename('ko.animate.min.css'))
         .pipe(minifyCSS({keepBreaks:true}))
@@ -46,4 +43,4 @@ gulp.task('default', function(){
 
     jsWatcher.on('change', onChange);
     lessWatcher.on('change', onChange);
-})
+});
