@@ -1,4 +1,4 @@
-function classManipulator(process){
+function classFunctionFactory(process){
     return function(element, className){
         var classes;
 
@@ -15,6 +15,19 @@ function classManipulator(process){
         } else {
             process(element, className);
         }
+    }
+}
+
+function eventListenerFunctionFactory(process){
+    return function(element, events, handler){
+        if (typeof handler !== 'function' || typeof element !== 'object' || typeof events !== 'string' || events.length === 0){
+            throw new Error('Invalid argument');
+        }
+
+        var eventList = events.split(' ');
+        eventList.forEach(function(event){
+            process(element, event, handler);
+        });
     }
 }
 
@@ -47,38 +60,20 @@ function animateTo(data, cb){
     }
 }
 
-function addEventListener(element, events, handler){
-    if (typeof handler !== 'function' || typeof element !== 'object' || typeof events !== 'string' || events.length === 0){
-        throw new Error('Invalid argument');
-    }
-
-    var eventList = events.split(' ');
-    eventList.forEach(function(event){
-        element.addEventListener(event, handler);
-    });
-}
-
-function removeEventListener(element, events, handler){
-    if (typeof handler !== 'function' || typeof element !== 'object' || typeof events !== 'string' || events.length === 0){
-        throw new Error('Invalid argument');
-    }
-
-    var eventList = events.split(' ');
-    eventList.forEach(function(event){
-        element.removeEventListener(event, handler);
-    });
-}
-
 module.exports = {
-    addClass: classManipulator(function(element, name){
+    addClass: classFunctionFactory(function(element, name){
         if (element.className.indexOf(name) === -1){
             element.className = element.className + ' ' + name;
         }
     }),
-    removeClass: classManipulator(function(element, name){
+    removeClass: classFunctionFactory(function(element, name){
         element.className = element.className.replace(name, '').trim();
     }),
     animateTo: animateTo,
-    addEventListener: addEventListener,
-    removeEventListener: removeEventListener
+    addEventListener: eventListenerFunctionFactory(function(element, event, handler){
+        element.addEventListener(event, handler);
+    }),
+    removeEventListener: eventListenerFunctionFactory(function(element, event, handler){
+        element.removeEventListener(event, handler);
+    })
 };
